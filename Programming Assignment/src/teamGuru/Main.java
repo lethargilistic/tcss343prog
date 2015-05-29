@@ -7,8 +7,6 @@ package teamGuru;
  * Class: TCSS 343 Spring 2015
  */
 
-// testing this push
-
 public class Main {
 
 }
