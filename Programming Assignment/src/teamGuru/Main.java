@@ -103,15 +103,17 @@ public class Main {
 	}
 	
 	//BRUTE FORCE SOLUTION & HELPER METHODS
-	/** @author ian*/
+	/** @author ian
+	 *  Computes all possible solutions by using bitstrings.
+	 */
 	private int aBruteForce(int cost[][]) {
 		int minCost = Integer.MAX_VALUE;
 		for(int i=1; i<Math.pow(2, cost.length-1); i++) {
-			String bin = toBitString(i, cost.length-1);
-			//check if LSB is 0, if so, not a valid solution
-			if(bin.charAt(bin.length()-1)=='0') {
+			//any even solutions never reach the last post
+			if(i%2==0) {
 				continue;
 			}
+			String bin = toBitString(i, cost.length-1);
 			int solution = 0;
 			int y = 0;
 			for(int x=0; x<bin.length(); x++) {
