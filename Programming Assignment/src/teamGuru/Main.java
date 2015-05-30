@@ -26,6 +26,10 @@ public class Main {
 		input = z.readIn("input.txt");
 		z.printTable(input);
 		z.bruteForce(input);
+		
+		//testing for brute force
+		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		System.out.println(z.aBruteForce(cost));
 	}
 	
 	
@@ -101,10 +105,36 @@ public class Main {
 	//BRUTE FORCE SOLUTION & HELPER METHODS
 	/** @author ian*/
 	private int aBruteForce(int cost[][]) {
-		return 404;
-		//have to do dishes, but I have written solution to this one
-		//that I'll code up in an hour
-		//(in case anyone reads this)
+		int minCost = Integer.MAX_VALUE;
+		for(int i=1; i<Math.pow(2, cost.length-1); i++) {
+			String bin = toBitString(i, cost.length-1);
+			//check if LSB is 0, if so, not a valid solution
+			if(bin.charAt(bin.length()-1)=='0') {
+				continue;
+			}
+			int solution = 0;
+			int y = 0;
+			for(int x=0; x<bin.length(); x++) {
+				if(bin.charAt(x)=='1') {
+					solution += cost[y][x+1];
+					y = x+1;
+				}
+			}
+			if(solution < minCost) {
+				minCost = solution;
+			}
+		}
+		return minCost;
+	}
+	
+	//returns a bitString with leading 0's
+	private String toBitString(int nummy, int size) {
+		StringBuilder str = new StringBuilder();
+		str.append(Integer.toBinaryString(nummy));
+		while(str.length()<size) {
+			str.insert(0, 0);
+		}
+		return str.toString();
 	}
 }
 
