@@ -19,24 +19,13 @@ public class Main {
 	private static int ARRAY_WIDTH;
 	
 	public static void main(String[] args) throws FileNotFoundException{
+		String in = args[0];//gets the command line argument, which will be the name of the file to use
 		Main z = new Main();
+		int input[][];
 
-		int input[][] = z.readIn("input.txt");
+		input = z.readIn("input.txt");
+		z.printTable(input);
 		z.bruteForce(input);
-		
-		
-		//prints the table
-		int x;
-		for(int i = 0; i < ARRAY_WIDTH; i++){
-			for(int j = 0; j < ARRAY_WIDTH; j++){
-				x = input[i][j];
-				if(x < 0)
-					System.out.print(x+" ");
-				else
-					System.out.print(" "+x+" ");
-			}
-			System.out.println();
-		}
 	}
 	
 	
@@ -69,9 +58,23 @@ public class Main {
 		return inArray;
 	}
 	
+	private void printTable(int input[][]){
+		int x;
+		for(int i = 0; i < ARRAY_WIDTH; i++){
+			for(int j = 0; j < ARRAY_WIDTH; j++){
+				x = input[i][j];
+				if(x < 0)
+					System.out.print(x+" ");
+				else
+					System.out.print(" "+x+" ");
+			}
+			System.out.println();
+		}
+	}
+	
 	/** @author Robbie */
 	private void bruteForce(int input[][]){
-		//only does computes 1 solution
+		//only computes 1 solution
 		//should probably recursive
 		int sum = 0, oldSum = 0;
 		List<Point> sequence = new ArrayList<Point>(), oldSeq;
