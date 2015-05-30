@@ -30,18 +30,18 @@ public class Main {
 		}
 		inArray = new int[x][x];
 		ARRAY_WIDTH = x;
-		Scanner strRd;
+		Scanner strScan;
 		for(int i = 0; i < x; i++){
 			int j = 0;
-			strRd = new Scanner(lines.get(i));
-			while(strRd.hasNext()){
-				String str = strRd.next();
+			strScan = new Scanner(lines.get(i));
+			while(strScan.hasNext()){
+				String str = strScan.next();
 				if(str.equals("NA"))//if the String is NA then set to sentinel -1
 					inArray[i][j++] = -1;
 				else 
 					inArray[i][j++] = Integer.parseInt(str); //otherwise parse int and store.
 			}
- 			strRd.close();
+ 			strScan.close();
 		}
 		in.close();
 		return inArray;
