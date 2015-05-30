@@ -97,5 +97,14 @@ public class Main {
 		}
 		System.out.println(sum);
 	}
+	
+	//BRUTE FORCE SOLUTION & HELPER METHODS
+	/** @author ian*/
+	private int aBruteForce(int cost[][]) {
+		return 404;
+		//have to do dishes, but I have written solution to this one
+		//that I'll code up in an hour
+		//(in case anyone reads this)
+	}
 }
 
