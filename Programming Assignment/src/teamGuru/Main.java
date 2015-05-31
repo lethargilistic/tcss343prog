@@ -35,7 +35,8 @@ public class Main {
 		//testing for brute force
 		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
 		System.out.println(z.aBruteForce(input));
-		System.out.println(z.aDivideandConquer(cost, 0, 0));
+		int x = 0, y = 0; // I'm not sure if any value between 0-4 work? - Jef
+		System.out.println(z.aDivideandConquer(cost, x, y));
 	}
 	
 	
