@@ -207,6 +207,10 @@ public class Main {
 	//Not sure if this is considered a 'divide' and conquer or
 	// 'decrease' and conquer but its a good starting point.
 	//Still needs testing.
+	//Not currently working, just needs to convert path to mincost
+	//will do a full write-up of how it works for presentations
+	//but it's pretty close to the self-reduction mentioned in the
+	//DivideConquer.txt. file.
 	// Looks pretty good :) - Jef
 	/**
 	 * @author Ian
