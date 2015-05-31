@@ -3,10 +3,13 @@ package teamGuru;
 import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /*
  * Authors: Robbie Nichols, Mike Overby, Ian McPeek, Jeffrey LeCompte
@@ -19,17 +22,17 @@ public class Main {
 	private static int ARRAY_WIDTH;
 	
 	public static void main(String[] args) throws FileNotFoundException{
-		String in = args[0];//gets the command line argument, which will be the name of the file to use
+//		String in = args[0];//gets the command line argument, which will be the name of the file to use
 		Main z = new Main();
-		int input[][];
+//		int input[][];
 
-		input = z.readIn("input.txt");
-		z.printTable(input);
-		z.bruteForce(input);
+//		input = z.readIn("input.txt");
+//		z.printTable(input);
+//		z.bruteForce(input);
 		
 		//testing for brute force
-		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		System.out.println(z.aBruteForce(cost));
+		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};	
+		System.out.println(z.aBruteForce(z.readData("/testInput.csv")));
 	}
 	
 	
@@ -59,6 +62,39 @@ public class Main {
  			strScan.close();
 		}
 		in.close();
+		return inArray;
+	}
+	
+	/** @author ian 
+	 *  Reads in 2D array from file.
+	 */
+	private int[][] readData(String filename) {
+		ArrayList<ArrayList<Integer>> arrO = 
+				new ArrayList<ArrayList<Integer>>();
+		InputStream in = this.getClass().getResourceAsStream(filename);
+		//abort if no file found
+		if(in==null) {return null;}
+		Scanner scanner = new Scanner(in);
+        while(scanner.hasNextLine()) {
+        	StringTokenizer token = new StringTokenizer(scanner.nextLine(), ",");
+        	ArrayList<Integer> arrI = new ArrayList<Integer>();
+        	while(token.hasMoreTokens()) {
+        		arrI.add(Integer.parseInt(token.nextToken()));
+        	}
+        	arrO.add(arrI);
+        }
+        //close open streams
+        scanner.close();
+        try {in.close();
+		} catch (IOException e) {
+			e.printStackTrace();}
+        //craft 2D array from Double-Decker ArrayList
+		int [][]inArray = new int[arrO.size()][arrO.size()];
+		for(int i=0; i<arrO.size(); i++) {
+			for(int j=0; j<arrO.size(); j++) {
+				inArray[i][j] = arrO.get(i).get(j);
+			}
+		}
 		return inArray;
 	}
 	
