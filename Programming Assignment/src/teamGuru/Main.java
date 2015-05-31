@@ -34,8 +34,8 @@ public class Main {
 		
 		//testing for brute force
 		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		System.out.println(z.aDivideandConquer(cost, 0, 0));
 		System.out.println(z.aBruteForce(input));
+		System.out.println(z.aDivideandConquer(cost, 0, 0));
 	}
 	
 	
@@ -205,11 +205,9 @@ public class Main {
 	//Not sure if this is considered a 'divide' and conquer or
 	// 'decrease' and conquer but its a good starting point.
 	//Still needs testing.
-	// Looks pretty good, but it's a little broken. I'm getting
-	// this output "Minimum Cost: 2147483647 Path: " when tested with our
-	// cost[][] and x = 0, y = 0
+	// Looks pretty good :) I made a stupid mistake
 	/**
-	 * @author ian
+	 * @author Ian
 	 * Finds the minimum cost and path through recursion.
 	 * @param cost
 	 * @param x
@@ -217,19 +215,19 @@ public class Main {
 	 * @return the minimum cost and it's path
 	 */
 	private String aDivideandConquer(int cost[][], int x, int y) {
-		if(x == 1) {
+		if (x == 1) {
 			return cost[1][y] + ",";
-		} else if(x < y) {
+		} else if (x < y) {
 			return aDivideandConquer(cost, x, x) + cost[x][y] + ",";
 		} else {
 			String winningSolution = "";
 			int minCost = Integer.MAX_VALUE;
-			for(int i = 1; i < y - 1; i++) {
+			for (int i = 1; i < y - 1; i++) {
 				int solutionCost = 0;
 				String solution = aDivideandConquer(cost, i, y);
 				//retrieve minimum cost from solution
 				//solutionCost = retrieve(solution);
-				if(solutionCost < minCost) {
+				if (solutionCost < minCost) {
 					minCost = solutionCost;
 					winningSolution = solution;
 				}
