@@ -37,6 +37,7 @@ public class Main {
 		System.out.println(z.aBruteForce(input));
 		int x = 0, y = 0; // I'm not sure if any value between 0-4 work? - Jef
 		System.out.println(z.aDivideandConquer(cost, x, y));
+		System.out.println(z.aDynamicProgramming(cost));
 	}
 	
 	
@@ -206,7 +207,7 @@ public class Main {
 	//Not sure if this is considered a 'divide' and conquer or
 	// 'decrease' and conquer but its a good starting point.
 	//Still needs testing.
-	// Looks pretty good :) I made a stupid mistake
+	// Looks pretty good :) - Jef
 	/**
 	 * @author Ian
 	 * Finds the minimum cost and path through recursion.
@@ -241,4 +242,15 @@ public class Main {
      * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
      *************************************************/
 	
+	/*
+	 * I'm going to be working on this and any adds would
+	 * be great! :D If I goof up at all or if you could comment
+	 * anything that you think is good would be sweet.
+	 * 
+	 * Thanks
+	 * @author Jeffrey LeCompte
+	 */
+	private String aDynamicProgramming(int cost[][]) {
+		return null;
+	}
 }
