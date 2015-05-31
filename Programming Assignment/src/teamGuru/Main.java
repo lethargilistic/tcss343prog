@@ -26,13 +26,15 @@ public class Main {
 		Main z = new Main();
 //		int input[][];
 
+		int[][] input = z.readIn("src/testInput.csv");
+		
 //		input = z.readIn("input.txt");
 //		z.printTable(input);
 //		z.bruteForce(input);
 		
 		//testing for brute force
 		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};	
-		System.out.println(z.aBruteForce(z.readData("/testInput.csv")));
+		System.out.println(z.aBruteForce(input));
 	}
 	
 	
@@ -59,10 +61,13 @@ public class Main {
 			strScan = new Scanner(lines.get(i));
 			while(strScan.hasNext()){
 				String str = strScan.next();
-				if(str.equals("NA"))//if the String is NA then set to sentinel -1
-					inArray[i][j++] = -1;
-				else 
-					inArray[i][j++] = Integer.parseInt(str); //otherwise parse int and store.
+				for (String s : str.split(","))
+				{
+    				if(s.equals("NA"))//if the String is NA then set to sentinel -1
+    					inArray[i][j++] = -1;
+    				else
+    					inArray[i][j++] = Integer.parseInt(s); //otherwise parse int and store.
+				}
 			}
  			strScan.close();
 		}
