@@ -8,9 +8,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 /*
@@ -202,6 +200,39 @@ public class Main {
     /************************************************
      * DIVIDE AND CONQUER SOLUTION & HELPER METHODS *
      ************************************************/
+	
+	//Not sure if this is considered a 'divide' and conquer or
+	// 'decrease' and conquer but its a good starting point.
+	//Still needs testing.
+	/**
+	 * @author ian
+	 * Finds the minimum cost and path through recursion.
+	 * @param cost
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	private String aDivideandConquer(int cost[][], int x, int y) {
+		if(x==1) {
+			return cost[1][y] + ",";
+		} else if(x<y) {
+			return aDivideandConquer(cost, x, x) + cost[x][y] + ",";
+		} else {
+			String winningSolution = "";
+			int minCost = Integer.MAX_VALUE;
+			for(int i=1; i<y-1; i++) {
+				int solutionCost = 0;
+				String solution = aDivideandConquer(cost, i, y);
+				//retrieve minimum cost from solution
+				//solutionCost = retrieve(solution);
+				if(solutionCost<minCost) {
+					minCost = solutionCost;
+					winningSolution = solution;
+				}
+			}
+			return "Minimum Cost: " + minCost + " Path: " + winningSolution;
+		}
+	}
 
     /*************************************************
      * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
