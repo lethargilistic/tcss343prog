@@ -207,27 +207,4 @@ public class Main {
      * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
      *************************************************/
 	
-	private Stack<Integer> Dijkstra(int[][] G)
-	{
-	    PriorityQueue<Node> q = new PriorityQueue<>();
-	    int[] minimumDistance = new int[G.length];
-	    for (int i : minimumDistance)
-	        i = -1;
-	        //add to priority q
-	    
-	    while (!q.isEmpty())
-	    {
-	        
-	    }
-	    
-	}
-
-	private class Node
-	{
-	    int location;
-	    int destination;
-	    int cost;
-	    
-	    
-	}
 }
