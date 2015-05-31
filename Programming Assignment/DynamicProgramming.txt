@@ -31,4 +31,8 @@ From Wikipedia's D's A article, a Priority Queue implementation:
 
 Since Java only allows one return value, we can return the path somehow, stack? string? 
 	The cost of the minimum path will be the cost, obviously.
+	
+A stack would work well for what you mentioned, so we would have both the path and the cost.
+I'm working on some 360 code right now, but I'll write the algorithm later if no one gets to it first.	
+	-Ian
   

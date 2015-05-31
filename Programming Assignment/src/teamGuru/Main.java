@@ -155,9 +155,11 @@ public class Main {
 	
 	/** @author ian
 	 *  Computes all possible solutions by using bitstrings.
+	 *  @return a String containing the minimum cost and path.
 	 */
-	private int aBruteForce(int cost[][]) {
+	private String aBruteForce(int cost[][]) {
 		int minCost = Integer.MAX_VALUE;
+		String winningSolution = "";
 		for(int i=1; i<Math.pow(2, cost.length-1); i++) {
 			//any even solutions never reach the last post
 			if(i%2==0) {
@@ -165,18 +167,24 @@ public class Main {
 			}
 			String bin = toBitString(i, cost.length-1);
 			int solution = 0;
+			StringBuilder solutionString = new StringBuilder("1,");
 			int y = 0;
 			for(int x=0; x<bin.length(); x++) {
 				if(bin.charAt(x)=='1') {
 					solution += cost[y][x+1];
+					solutionString.append(x+2);
+					solutionString.append(",");
 					y = x+1;
 				}
 			}
 			if(solution < minCost) {
 				minCost = solution;
+				winningSolution = solutionString.substring(0, 
+						solutionString.length()-1);
 			}
 		}
-		return minCost;
+		//convert winningSolution to 
+		return "Minimum Cost: " + minCost + " Path: " + winningSolution;
 	}
 	
 	//returns a bitString with leading 0's
