@@ -122,6 +122,11 @@ public class Main {
 		}
 	}
 	
+
+    /*****************************************
+     * BRUTE FORCE SOLUTION & HELPER METHODS *
+     *****************************************/
+	
 	/** @author Robbie */
 	private void bruteForce(int input[][]){
 		//only computes 1 solution
@@ -147,10 +152,6 @@ public class Main {
 		}
 		System.out.println(sum);
 	}
-	
-	/*****************************************
-	 * BRUTE FORCE SOLUTION & HELPER METHODS *
-	 *****************************************/
 	
 	/** @author ian
 	 *  Computes all possible solutions by using bitstrings.
@@ -195,5 +196,7 @@ public class Main {
     /*************************************************
      * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
      *************************************************/
+	
+	
 }
 
