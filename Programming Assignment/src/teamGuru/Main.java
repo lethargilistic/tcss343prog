@@ -36,6 +36,11 @@ public class Main {
 	}
 	
 	
+	/****************
+     * FILE READING *
+     ****************/
+    
+	
 	//feel free to make changes to this piece of crap
 	/** @author Robbie */
 	private int[][] readIn(String fileName) throws FileNotFoundException{
@@ -138,7 +143,10 @@ public class Main {
 		System.out.println(sum);
 	}
 	
-	//BRUTE FORCE SOLUTION & HELPER METHODS
+	/*****************************************
+	 * BRUTE FORCE SOLUTION & HELPER METHODS *
+	 *****************************************/
+	
 	/** @author ian
 	 *  Computes all possible solutions by using bitstrings.
 	 */
@@ -174,5 +182,13 @@ public class Main {
 		}
 		return str.toString();
 	}
+	
+    /************************************************
+     * DIVIDE AND CONQUER SOLUTION & HELPER METHODS *
+     ************************************************/
+
+    /*************************************************
+     * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
+     *************************************************/
 }
 
