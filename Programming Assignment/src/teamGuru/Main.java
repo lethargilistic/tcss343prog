@@ -268,6 +268,7 @@ public class Main {
 	
 	//are you going to use djikstra with a directed graph?
 	//its like the perfect solution, props to Mike. -Ian
+	// yeah i'll probably use that. that sounds good.
 	/*
 	 * I'm going to be working on this and any adds would
 	 * be great! :D If I goof up at all or if you could comment
