@@ -46,9 +46,15 @@ public class Main {
      * FILE READING *
      ****************/
     
+	//Ian's reads from .csv while the below method reads tab-spaced text files.
+	//Does your assignment specify that you're reading in from .csv b/c my assignment 
+	//specifies that the input files are tab delineated text.
 	
-	//feel free to make changes to this piece of crap
-	/** @author Robbie */
+	/** 
+	 * @author Robbie 
+	 * 
+	 * This method reads a tab delineated sample file -- NOT A .CSV
+	 */
 	private int[][] readIn(String fileName) throws FileNotFoundException{
 		Scanner in = new Scanner(new FileReader(fileName));
 		int inArray[][], x = 0;
@@ -134,7 +140,7 @@ public class Main {
 	/** @author Robbie */
 	private void bruteForce(int input[][]){
 		//only computes 1 solution
-		//should probably recursive
+		//should probably be recursive
 		int sum = 0, oldSum = 0;
 		List<Point> sequence = new ArrayList<Point>(), oldSeq;
 		
