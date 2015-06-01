@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,19 +27,26 @@ public class Main {
 		Main z = new Main();
 //		int input[][];
 
-		int[][] input = z.readIn("src/testInput.csv");
+		int[][] input = z.readIn("src/testInput.txt");
+		input = z.readData("/testInput.txt");
 		
 //		input = z.readIn("input.txt");
 //		z.printTable(input);
 //		z.bruteForce(input);
 		
 		//testing for brute force
-		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		System.out.println(z.aBruteForce(input));
-		int x = 0, y = 0; // I'm not sure if any value between 0-4 work? - Jef
+		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		int n = 5;
+		int cost[][] = z.generateMatrix(n);
+		for(int[]arr:cost) {
+			System.out.println(Arrays.toString(arr));
+		}
+		System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
+	    // I'm not sure if any value between 0-4 work? - Jef
 						  //not fully implemented yet - Ian
-		System.out.println(z.aDivideandConquer(cost, x, y));
-		System.out.println(z.aDynamicProgramming(cost));
+		//The value of n is the index of the post we want the min cost of (n-1)
+		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost, n-1, n-1));
+		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
 	}
 	
 	
@@ -49,6 +57,11 @@ public class Main {
 	//Ian's reads from .csv while the below method reads tab-spaced text files.
 	//Does your assignment specify that you're reading in from .csv b/c my assignment 
 	//specifies that the input files are tab delineated text.
+	
+	
+	//Was totally coincidental that I was using csv. Just happened to be using it in
+	//my 360 class. Just changed it to parse tabs. They both work so use whichever you want.
+	//
 	
 	/** 
 	 * @author Robbie 
@@ -96,7 +109,7 @@ public class Main {
 		if(in==null) {return null;}
 		Scanner scanner = new Scanner(in);
         while(scanner.hasNextLine()) {
-        	StringTokenizer token = new StringTokenizer(scanner.nextLine(), ",");
+        	StringTokenizer token = new StringTokenizer(scanner.nextLine(), "\t");
         	ArrayList<Integer> arrI = new ArrayList<Integer>();
         	while(token.hasMoreTokens()) {
         		arrI.add(Integer.parseInt(token.nextToken()));
@@ -265,5 +278,26 @@ public class Main {
 	 */
 	private String aDynamicProgramming(int cost[][]) {
 		return null;
+	}
+	
+	/*************************************************
+     * COST MATRIX RANDOM GENERATER & HELPER METHODS *
+     *************************************************/
+	
+	/**
+	 * @author ian
+	 * @param n
+	 * @return
+	 */
+	private int[][] generateMatrix(int n) {
+		int [][]arr = new int[n][n];
+		for(int i=0; i<n; i++) {
+			for(int j=0; j<n; j++) {
+				if(j>i) {
+					arr[i][j] = (int)(Math.random()*9) +1;
+				}
+			}
+		}
+		return arr;
 	}
 }
