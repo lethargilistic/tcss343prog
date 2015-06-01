@@ -19,12 +19,12 @@ import java.util.StringTokenizer;
  * Class: TCSS 343 Spring 2015
  */
 
-public class Main {
+public class tcss343 {
 	private static int ARRAY_WIDTH;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 //		String in = args[0];//gets the command line argument, which will be the name of the file to use
-		Main z = new Main();
+		tcss343 z = new tcss343();
 //		int input[][];
 
 		int[][] input = z.readIn("src/testInput.txt");
