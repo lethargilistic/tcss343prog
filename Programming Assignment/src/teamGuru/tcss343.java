@@ -138,7 +138,7 @@ public class tcss343 {
 	//but it's pretty close to the self-reduction mentioned in the
 	//DivideConquer.txt. file.
 	// Looks pretty good :) - Jef
-	public String aDivideandConquer(int cost[][]) {
+	private String aDivideandConquer(int cost[][]) {
 		//retrive data from String
 		String solution = aDivideandConquer(cost, cost.length-1, cost.length-1);
 		int minCost = retrieveCost(solution);
@@ -198,16 +198,16 @@ public class tcss343 {
 	 * Thanks
 	 * @author Jeffrey LeCompte
 	 */
-	public String aDynamicProgramming(int cost[][]) {
+	private String aDynamicProgramming(int cost[][]) {
 		// initialize vertices
 		List<Vertex> vertices = new ArrayList<Vertex>();
 		int count = 0;
 		
 		// adds all vertexes to an ArrayList
-		for (int i = 0; i < GRAPH_SIZE; i++) {
-			for (int j = 0; j < GRAPH_SIZE; j++) {
-				vertices.add(new Vertex(cost[i][j]));
-				vertices.get(count).adjacencies = new Edge();
+		//1,2 1,3 ,1,4 2,3 ,2,4 3,4
+		for (int i = 1; i < GRAPH_SIZE; i++) {
+			for (int j = i + 1; j < GRAPH_SIZE; j++) {
+				vertices.add();
 			}
 		}
 		return null;
