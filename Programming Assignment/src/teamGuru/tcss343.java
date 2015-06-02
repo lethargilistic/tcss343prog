@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 5;
+	private static int GRAPH_SIZE = 4;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 //		String in = args[0];//gets the command line argument, which will be the name of the file to use
@@ -33,21 +33,14 @@ public class tcss343 {
 		int[][] input = z.readIn("src/testInput.txt");
 		input = z.readData("/testInput.txt");
 		
-//		input = z.readIn("input.txt");
-//		z.printTable(input);
-//		z.bruteForce(input);
-		
 		//testing for brute force
-		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		int cost[][] = z.generateMatrix(GRAPH_SIZE);
+		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		//int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
 		System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
-	    // I'm not sure if any value between 0-4 work? - Jef
-						  //not fully implemented yet - Ian
-		//The value of n is the index of the post we want the min cost of (n-1)
-		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost, GRAPH_SIZE - 1, GRAPH_SIZE - 1));
+		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
 		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
 	}
 	
@@ -147,7 +140,7 @@ public class tcss343 {
 	 *  Computes all possible solutions by using bitstrings.
 	 *  @return a String containing the minimum cost and path.
 	 */
-	private String aBruteForce(int cost[][]) {
+	public String aBruteForce(int cost[][]) {
 		int minCost = Integer.MAX_VALUE;
 		String winningSolution = "";
 		for(int i=1; i<Math.pow(2, cost.length-1); i++) {
@@ -170,7 +163,7 @@ public class tcss343 {
 			if(solution < minCost) {
 				minCost = solution;
 				winningSolution = solutionString.substring(0, 
-						solutionString.length() - 1);
+						solutionString.lastIndexOf(","));
 			}
 		}
 		//convert winningSolution to 
@@ -193,12 +186,19 @@ public class tcss343 {
 	
 	//Not sure if this is considered a 'divide' and conquer or
 	// 'decrease' and conquer but its a good starting point.
-	//Still needs testing.
-	//Not currently working, just needs to convert path to mincost
 	//will do a full write-up of how it works for presentations
 	//but it's pretty close to the self-reduction mentioned in the
 	//DivideConquer.txt. file.
 	// Looks pretty good :) - Jef
+	public String aDivideandConquer(int cost[][]) {
+		//retrive data from String
+		String solution = aDivideandConquer(cost, cost.length-1, cost.length-1);
+		int minCost = retrieveCost(solution);
+		solution = solution.substring(0, solution.lastIndexOf(","));;
+		return "Minimum Cost: " + minCost + " Path: " + solution;
+	}
+	
+	
 	/**
 	 * @author Ian
 	 * Finds the minimum cost and path through recursion.
@@ -208,34 +208,41 @@ public class tcss343 {
 	 * @return the minimum cost and it's path
 	 */
 	private String aDivideandConquer(int cost[][], int x, int y) {
-		if (x == 1) {
-			return cost[1][y] + ",";
+		if (x == 0) {
+			return "1, " + (y+1) + ", :" + cost[0][y];
 		} else if (x < y) {
-			return aDivideandConquer(cost, x, x) + cost[x][y] + ",";
+			//clip off the cost from path "1,2,n...,:c"
+			String path = aDivideandConquer(cost, x, x);
+			int theCost = retrieveCost(path) + cost[x][y];
+			path = path.substring(0, path.indexOf(":"));
+			return path + (y+1) + ", :" + theCost;
 		} else {
 			String winningSolution = "";
 			int minCost = Integer.MAX_VALUE;
-			for (int i = 1; i < y - 1; i++) {
-				int solutionCost = 0;
-				String solution = aDivideandConquer(cost, i, y);
+			for (int i = 0; i < y; i++) {
 				//retrieve minimum cost from solution
-				//solutionCost = retrieve(solution);
+				String solution = aDivideandConquer(cost, i, y);
+				int solutionCost = retrieveCost(solution)+cost[x][y];
+				solution = solution.substring(0, solution.indexOf(":"));
 				if (solutionCost < minCost) {
 					minCost = solutionCost;
-					winningSolution = solution;
+					winningSolution = solution+ ":" + solutionCost;
 				}
 			}
-			return "Minimum Cost: " + minCost + " Path: " + winningSolution;
+			return winningSolution;
 		}
+	}
+	
+	private int retrieveCost(String path) {
+		String costS = path.substring(path.indexOf(":")+1, 
+				path.length());
+		return Integer.parseInt(costS);
 	}
 
     /*************************************************
      * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
      *************************************************/
 	
-	//are you going to use djikstra with a directed graph?
-	//its like the perfect solution, props to Mike. -Ian
-	// yeah i'll probably use that. that sounds good.
 	/*
 	 * I'm going to be working on this and any adds would
 	 * be great! :D If I goof up at all or if you could comment
@@ -244,7 +251,7 @@ public class tcss343 {
 	 * Thanks
 	 * @author Jeffrey LeCompte
 	 */
-	private String aDynamicProgramming(int cost[][]) {
+	public String aDynamicProgramming(int cost[][]) {
 		// initialize vertices
 		List<Vertex> vertices = new ArrayList<Vertex>();
 		int count = 0;
