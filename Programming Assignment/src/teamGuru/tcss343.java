@@ -18,22 +18,22 @@ import java.util.Scanner;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 20;
+	private static int GRAPH_SIZE = 4;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
 
-		int[][] input = z.readIn();
+		//int[][] input = z.readIn();
 		
 		//testing with sample data
-		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		int cost[][] = z.generateMatrix(GRAPH_SIZE);
+		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		//int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
 		System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
 		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
-		//System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
+		System.out.println("Dynamic Programming~ \t"+ z.dynamicProgramming(cost));
 	}
 	
 	
@@ -119,7 +119,7 @@ public class tcss343 {
 	
 	//returns a bitString with leading 0's
 	private String toBitString(int nummy, int size) {
-		System.out.println("Comparing solution #" + nummy);
+		//System.out.println("Comparing solution #" + nummy);
 		StringBuilder str = new StringBuilder();
 		str.append(Integer.toBinaryString(nummy));
 		while(str.length()<size) {
@@ -189,6 +189,26 @@ public class tcss343 {
     /*************************************************
      * DYNAMIC PROGRAMMING SOLUTION & HELPER METHODS *
      *************************************************/
+	
+	public String dynamicProgramming(int cost[][]) {
+		int []minCosts = new int[cost.length];
+		minCosts[0] = 0;
+		minCosts[1] = cost[0][1];
+
+		for(int i=2; i<cost.length; i++) {
+			int minnie = cost[0][i];
+			for(int j=1; j<i; j++) {
+				int currCost = minCosts[j] + cost[j][i];
+				if(currCost < minnie) {
+					minnie = currCost;
+				}
+			}
+			minCosts[i] = minnie;
+		}
+
+		return "Cost: " + minCosts[cost.length-1];
+	}
+	
 	
 	/*
 	 * I'm going to be working on this and any adds would
