@@ -25,12 +25,9 @@ public class tcss343 {
 	private static int GRAPH_SIZE = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException{
-//		String in = args[0];//gets the command line argument, which will be the name of the file to use
 		tcss343 z = new tcss343();
-//		int input[][];
 
-		int[][] input = z.readIn("src/testInput.txt");
-		input = z.readData("/testInput.txt");
+		int[][] input = z.readIn();
 		
 		//testing with sample data
 		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
@@ -53,8 +50,11 @@ public class tcss343 {
 	 * 
 	 * This method reads a tab delineated sample file -- NOT A .CSV
 	 */
-	private int[][] readIn(String fileName) throws FileNotFoundException{
-		Scanner in = new Scanner(new FileReader(fileName));
+//	private int[][] readIn(String fileName) throws FileNotFoundException{
+	private int[][] readIn(){
+//		Scanner in = new Scanner(new FileReader(fileName));
+		Scanner in = new Scanner(System.in);
+		
 		int inArray[][], x = 0;
 		List<String> lines = new LinkedList<String>();
 		while(in.hasNextLine()){
@@ -80,39 +80,6 @@ public class tcss343 {
  			strScan.close();
 		}
 		in.close();
-		return inArray;
-	}
-	
-	/** @author ian 
-	 *  Reads in 2D array from file.
-	 */
-	private int[][] readData(String filename) {
-		ArrayList<ArrayList<Integer>> arrO = 
-				new ArrayList<ArrayList<Integer>>();
-		InputStream in = this.getClass().getResourceAsStream(filename);
-		//abort if no file found
-		if(in==null) {return null;}
-		Scanner scanner = new Scanner(in);
-        while(scanner.hasNextLine()) {
-        	StringTokenizer token = new StringTokenizer(scanner.nextLine(), "\t");
-        	ArrayList<Integer> arrI = new ArrayList<Integer>();
-        	while(token.hasMoreTokens()) {
-        		arrI.add(Integer.parseInt(token.nextToken()));
-        	}
-        	arrO.add(arrI);
-        }
-        //close open streams
-        scanner.close();
-        try {in.close();
-		} catch (IOException e) {
-			e.printStackTrace();}
-        //craft 2D array from Double-Decker ArrayList
-		int [][]inArray = new int[arrO.size()][arrO.size()];
-		for(int i=0; i<arrO.size(); i++) {
-			for(int j=0; j<arrO.size(); j++) {
-				inArray[i][j] = arrO.get(i).get(j);
-			}
-		}
 		return inArray;
 	}
 	
