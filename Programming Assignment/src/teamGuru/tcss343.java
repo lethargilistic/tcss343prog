@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 4;
+	private static int GRAPH_SIZE = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 //		String in = args[0];//gets the command line argument, which will be the name of the file to use
@@ -33,9 +33,9 @@ public class tcss343 {
 		int[][] input = z.readIn("src/testInput.txt");
 		input = z.readData("/testInput.txt");
 		
-		//testing for brute force
-		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		//int cost[][] = z.generateMatrix(GRAPH_SIZE);
+		//testing with sample data
+		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
@@ -172,6 +172,7 @@ public class tcss343 {
 	
 	//returns a bitString with leading 0's
 	private String toBitString(int nummy, int size) {
+		System.out.println("Comparing solution #" + nummy);
 		StringBuilder str = new StringBuilder();
 		str.append(Integer.toBinaryString(nummy));
 		while(str.length()<size) {
@@ -197,7 +198,6 @@ public class tcss343 {
 		solution = solution.substring(0, solution.lastIndexOf(","));;
 		return "Minimum Cost: " + minCost + " Path: " + solution;
 	}
-	
 	
 	/**
 	 * @author Ian
