@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -21,6 +23,7 @@ import java.util.StringTokenizer;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
+	private static int GRAPH_SIZE = 5;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 //		String in = args[0];//gets the command line argument, which will be the name of the file to use
@@ -36,8 +39,7 @@ public class tcss343 {
 		
 		//testing for brute force
 		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		int n = 5;
-		int cost[][] = z.generateMatrix(n);
+		int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
@@ -45,7 +47,7 @@ public class tcss343 {
 	    // I'm not sure if any value between 0-4 work? - Jef
 						  //not fully implemented yet - Ian
 		//The value of n is the index of the post we want the min cost of (n-1)
-		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost, n-1, n-1));
+		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost, GRAPH_SIZE - 1, GRAPH_SIZE - 1));
 		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
 	}
 	
@@ -243,8 +245,60 @@ public class tcss343 {
 	 * @author Jeffrey LeCompte
 	 */
 	private String aDynamicProgramming(int cost[][]) {
-		// i (x) = rows j (y) = columns
+		// initialize vertices
+		List<Vertex> vertices = new ArrayList<Vertex>();
+		int count = 0;
+		
+		// adds all vertexes to an ArrayList
+		for (int i = 0; i < GRAPH_SIZE; i++) {
+			for (int j = 0; j < GRAPH_SIZE; j++) {
+				vertices.add(new Vertex(cost[i][j]));
+				vertices.get(count).adjacencies = new Edge();
+			}
+		}
 		return null;
+	}
+	
+	/*************************************************
+	 *    HELPER METHODS FOR DYNAMIC PROGRAMMING     *
+	 *************************************************/
+	
+	private static List<Vertex> getShortestPathTo(Vertex target) {
+        List<Vertex> path = new ArrayList<Vertex>();
+        for (Vertex vertex = target; vertex != null; vertex = vertex.previous)
+            path.add(vertex);
+        // top-bottom sort of deal
+        Collections.reverse(path);
+        return path;
+	}
+	
+	private static void makePathWay(Vertex source) {
+		// source starts at 0
+		source.minDistance = 0.0;
+		PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
+		vertexQueue.add(source);
+		
+		// connects all edges
+		while (!vertexQueue.isEmpty()) {
+			// grabs head of PQ to evaluate
+			Vertex u = vertexQueue.poll();
+
+			for (Edge e : u.adjacencies) {
+				// sets next vertex it to current vertex
+				Vertex v = e.target;
+				// gets weight of current edge
+				double weight = e.weight;
+				// calculates overall distance between vertices
+				double distanceThroughU = u.minDistance + weight;
+				// places lowest edge weight in PQ
+				if (distanceThroughU < v.minDistance) {
+					vertexQueue.remove(v);
+					v.minDistance = distanceThroughU ;
+					v.previous = u;
+					vertexQueue.add(v);
+				}
+			}
+		}
 	}
 	
 	/*************************************************
@@ -267,4 +321,40 @@ public class tcss343 {
 		}
 		return arr;
 	}
+}
+
+
+/*************************************************
+ *    PRIVATE CLASSES FOR DYNAMIC PROGRAMMING    *
+ *************************************************/
+
+class Vertex implements Comparable<Vertex>
+{
+    public final int id;
+    public Edge[] adjacencies;
+    public double minDistance = Double.POSITIVE_INFINITY;
+    public Vertex previous;
+    
+    public Vertex(int id) {
+    	this.id = id;
+    }
+    
+    public String toString() {
+    	return Integer.toString(id);
+    }
+    
+    public int compareTo(Vertex other) {
+        return Double.compare(minDistance, other.minDistance);
+    }
+}
+
+class Edge
+{
+    public final Vertex target;
+    public final double weight;
+    
+    public Edge(Vertex target, double weight) {
+    	this.target = target;
+    	this.weight = weight;
+    }
 }
