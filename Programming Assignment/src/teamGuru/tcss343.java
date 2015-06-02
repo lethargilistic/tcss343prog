@@ -53,15 +53,6 @@ public class tcss343 {
 	/****************
      * FILE READING *
      ****************/
-    
-	//Ian's reads from .csv while the below method reads tab-spaced text files.
-	//Does your assignment specify that you're reading in from .csv b/c my assignment 
-	//specifies that the input files are tab delineated text.
-	
-	
-	//Was totally coincidental that I was using csv. Just happened to be using it in
-	//my 360 class. Just changed it to parse tabs. They both work so use whichever you want.
-	//
 	
 	/** 
 	 * @author Robbie 
@@ -149,32 +140,6 @@ public class tcss343 {
     /*****************************************
      * BRUTE FORCE SOLUTION & HELPER METHODS *
      *****************************************/
-	
-	/** @author Robbie */
-	private void bruteForce(int input[][]){
-		//only computes 1 solution
-		//should probably be recursive
-		int sum = 0, oldSum = 0;
-		List<Point> sequence = new ArrayList<Point>(), oldSeq;
-		
-		for (int i = 0; i < ARRAY_WIDTH; i++){
-			
-			for(int j = 0; j < ARRAY_WIDTH; j++){
-				
-				if (input[i][j] > 0){//if the value is not bologna
-					sum += input[i][j];
-					sequence.add(new Point(i, j));
-					i = j;
-				}
-			}
-			if(sum < oldSum){ //if sum is less than oldSum then store it as the old value
-				oldSum = sum;
-				oldSeq = new ArrayList<Point>(sequence);
-				sequence = new ArrayList<Point>();
-			}
-		}
-		System.out.println(sum);
-	}
 	
 	/** @author ian
 	 *  Computes all possible solutions by using bitstrings.
