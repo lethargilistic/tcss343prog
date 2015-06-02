@@ -346,10 +346,12 @@ class Vertex implements Comparable<Vertex>
     	this.id = id;
     }
     
+    @Override
     public String toString() {
     	return Integer.toString(id);
     }
     
+    @Override
     public int compareTo(Vertex other) {
         return Double.compare(minDistance, other.minDistance);
     }
