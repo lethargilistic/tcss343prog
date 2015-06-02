@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 4;
+	private static int GRAPH_SIZE = 100;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
@@ -26,27 +26,28 @@ public class tcss343 {
 		//int[][] input = z.readIn();
 		
 		//testing with sample data
-		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		//int cost[][] = z.generateMatrix(GRAPH_SIZE);
+		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
 		
-		long time = System.currentTimeMillis();
-		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
-		System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
+        long time = System.currentTimeMillis();
+		//System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
+        System.out.println("Dynamic Programming~ \t"+ z.dynamicProgramming(cost));
+        System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
+	    System.out.println();
+	    
+        time = System.currentTimeMillis();
+        System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
+        System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
         System.out.println();
         
         time = System.currentTimeMillis();
         System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
         System.out.println();
-        
-        time = System.currentTimeMillis();
-		//System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
-        System.out.println("Dynamic Programming~ \t"+ z.dynamicProgramming(cost));
-        System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
-	    System.out.println();
+
 	}
 	
 	/****************
