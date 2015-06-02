@@ -1,10 +1,6 @@
 package teamGuru;
 
-import java.awt.Point;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /*
  * Authors: Robbie Nichols, Mike Overby, Ian McPeek, Jeffrey LeCompte
@@ -26,12 +21,9 @@ public class tcss343 {
 	private static int GRAPH_SIZE = 30;
 	
 	public static void main(String[] args) throws FileNotFoundException{
-//		String in = args[0];//gets the command line argument, which will be the name of the file to use
 		tcss343 z = new tcss343();
-//		int input[][];
 
-		int[][] input = z.readIn("src/testInput.txt");
-		input = z.readData("/testInput.txt");
+		int[][] input = z.readIn();
 		
 		//testing with sample data
 		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
@@ -51,7 +43,7 @@ public class tcss343 {
         System.out.println();
         
         time = System.currentTimeMillis();
-//		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
+		//System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
 	    System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
 	    System.out.println();
 	}
@@ -65,8 +57,11 @@ public class tcss343 {
 	 * 
 	 * This method reads a tab delineated sample file -- NOT A .CSV
 	 */
-	private int[][] readIn(String fileName) throws FileNotFoundException{
-		Scanner in = new Scanner(new FileReader(fileName));
+//	private int[][] readIn(String fileName) throws FileNotFoundException{
+	private int[][] readIn(){
+//		Scanner in = new Scanner(new FileReader(fileName));
+		Scanner in = new Scanner(System.in);
+		
 		int inArray[][], x = 0;
 		List<String> lines = new LinkedList<String>();
 		while(in.hasNextLine()){
@@ -95,54 +90,6 @@ public class tcss343 {
 		return inArray;
 	}
 	
-	/** @author ian 
-	 *  Reads in 2D array from file.
-	 */
-	private int[][] readData(String filename) {
-		ArrayList<ArrayList<Integer>> arrO = 
-				new ArrayList<ArrayList<Integer>>();
-		InputStream in = this.getClass().getResourceAsStream(filename);
-		//abort if no file found
-		if(in==null) {return null;}
-		Scanner scanner = new Scanner(in);
-        while(scanner.hasNextLine()) {
-        	StringTokenizer token = new StringTokenizer(scanner.nextLine(), "\t");
-        	ArrayList<Integer> arrI = new ArrayList<Integer>();
-        	while(token.hasMoreTokens()) {
-        		arrI.add(Integer.parseInt(token.nextToken()));
-        	}
-        	arrO.add(arrI);
-        }
-        //close open streams
-        scanner.close();
-        try {in.close();
-		} catch (IOException e) {
-			e.printStackTrace();}
-        //craft 2D array from Double-Decker ArrayList
-		int [][]inArray = new int[arrO.size()][arrO.size()];
-		for(int i=0; i<arrO.size(); i++) {
-			for(int j=0; j<arrO.size(); j++) {
-				inArray[i][j] = arrO.get(i).get(j);
-			}
-		}
-		return inArray;
-	}
-	
-	private void printTable(int input[][]){
-		int x;
-		for(int i = 0; i < ARRAY_WIDTH; i++){
-			for(int j = 0; j < ARRAY_WIDTH; j++){
-				x = input[i][j];
-				if(x < 0)
-					System.out.print(x+" ");
-				else
-					System.out.print(" "+x+" ");
-			}
-			System.out.println();
-		}
-	}
-	
-
     /*****************************************
      * BRUTE FORCE SOLUTION & HELPER METHODS *
      *****************************************/
@@ -202,7 +149,7 @@ public class tcss343 {
 	//but it's pretty close to the self-reduction mentioned in the
 	//DivideConquer.txt. file.
 	// Looks pretty good :) - Jef
-	public String aDivideandConquer(int cost[][]) {
+	private String aDivideandConquer(int cost[][]) {
 		//retrive data from String
 		String solution = aDivideandConquer(cost, cost.length-1, cost.length-1);
 		int minCost = retrieveCost(solution);
@@ -262,16 +209,16 @@ public class tcss343 {
 	 * Thanks
 	 * @author Jeffrey LeCompte
 	 */
-	public String aDynamicProgramming(int cost[][]) {
+	private String aDynamicProgramming(int cost[][]) {
 		// initialize vertices
 		List<Vertex> vertices = new ArrayList<Vertex>();
 		int count = 0;
 		
 		// adds all vertexes to an ArrayList
-		for (int i = 0; i < GRAPH_SIZE; i++) {
-			for (int j = 0; j < GRAPH_SIZE; j++) {
-				vertices.add(new Vertex(cost[i][j]));
-				vertices.get(count).adjacencies = new Edge();
+		//1,2 1,3 ,1,4 2,3 ,2,4 3,4
+		for (int i = 1; i < GRAPH_SIZE; i++) {
+			for (int j = i + 1; j < GRAPH_SIZE; j++) {
+				vertices.add();
 			}
 		}
 		return null;
@@ -323,8 +270,7 @@ public class tcss343 {
      *    PRIVATE CLASSES FOR DYNAMIC PROGRAMMING    *
      *************************************************/
     
-    private class Vertex implements Comparable<Vertex>
-    {
+    private class Vertex implements Comparable<Vertex> {
         public final int id;
         public Edge[] adjacencies;
         public double minDistance = Double.POSITIVE_INFINITY;
@@ -345,8 +291,7 @@ public class tcss343 {
         }
     }
     
-    private class Edge
-    {
+    private class Edge {
         public final Vertex target;
         public final double weight;
         
@@ -355,7 +300,6 @@ public class tcss343 {
         	this.weight = weight;
         }
     }
-    
     
     /*************************************************
      * COST MATRIX RANDOM GENERATER & HELPER METHODS *
