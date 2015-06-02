@@ -220,6 +220,50 @@ public class tcss343 {
 	}
 	
 	
+	/*
+	 * 	Pair []minSolutions = new Pair[cost.length];
+	//minCosts[0] = 0;
+	minSolutions[0] = new Pair("1,", 0);
+	//minCosts[1] = cost[0][1];
+	minSolutions[1] = new Pair("1,2,", cost[0][1]);
+
+	for(int i=2; i<cost.length; i++) {
+		int minnie = cost[0][i];
+		String pathos = "1," + i + ",";
+		for(int j=1; j<i; j++) {
+			int currCost = minSolutions[j].getCost() + cost[j][i];
+				//minCosts[j] + cost[j][i];
+			if(currCost < minnie) {
+				minnie = currCost;
+				pathos = minSolutions[j].getPath() + i + ",";
+			}
+		}
+		//minCosts[i] = minnie;
+		minSolutions[i] = new Pair(pathos, minnie);
+	}
+
+	//return "Cost: " + minCosts[cost.length-1];
+	return "Path: " + minSolutions[cost.length-1].getCost() + "Path: " + minSolutions[cost.length-1].getPath();
+}
+
+private class Pair {
+	String path;
+	int cost;
+
+	public Pair(String apath, int acost) {
+		path = apath;
+		cost = acost;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+	 */
+	
 	
     /*************************************************
      * COST MATRIX RANDOM GENERATER & HELPER METHODS *
