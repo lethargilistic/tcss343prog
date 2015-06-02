@@ -1,17 +1,13 @@
 package teamGuru;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /*
  * Authors: Robbie Nichols, Mike Overby, Ian McPeek, Jeffrey LeCompte
@@ -203,14 +199,15 @@ public class tcss343 {
 	 * @author Jeffrey LeCompte
 	 */
 	public String aDynamicProgramming(int cost[][]) {
-		// initialize Map<K,V> and other variables
-		// K = Total Weight, V = Vertices
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		// initialize vertices
+		List<Vertex> vertices = new ArrayList<Vertex>();
+		int count = 0;
 		
-		
+		// adds all vertexes to an ArrayList
 		for (int i = 0; i < GRAPH_SIZE; i++) {
 			for (int j = 0; j < GRAPH_SIZE; j++) {
-				
+				vertices.add(new Vertex(cost[i][j]));
+				vertices.get(count).adjacencies = new Edge();
 			}
 		}
 		return null;
@@ -220,7 +217,78 @@ public class tcss343 {
 	 *    HELPER METHODS FOR DYNAMIC PROGRAMMING     *
 	 *************************************************/
 	
+	private static List<Vertex> getShortestPathTo(Vertex target) {
+        List<Vertex> path = new ArrayList<Vertex>();
+        for (Vertex vertex = target; vertex != null; vertex = vertex.previous)
+            path.add(vertex);
+        // top-bottom sort of deal
+        Collections.reverse(path);
+        return path;
+	}
 	
+	private static void makePathWay(Vertex source) {
+		// source starts at 0
+		source.minDistance = 0.0;
+		PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
+		vertexQueue.add(source);
+		
+		// connects all edges
+		while (!vertexQueue.isEmpty()) {
+			// grabs head of PQ to evaluate
+			Vertex u = vertexQueue.poll();
+
+			for (Edge e : u.adjacencies) {
+				// sets next vertex it to current vertex
+				Vertex v = e.target;
+				// gets weight of current edge
+				double weight = e.weight;
+				// calculates overall distance between vertices
+				double distanceThroughU = u.minDistance + weight;
+				// places lowest edge weight in PQ
+				if (distanceThroughU < v.minDistance) {
+					vertexQueue.remove(v);
+					v.minDistance = distanceThroughU ;
+					v.previous = u;
+					vertexQueue.add(v);
+				}
+			}
+		}
+	}
+
+    /*************************************************
+     *    PRIVATE CLASSES FOR DYNAMIC PROGRAMMING    *
+     *************************************************/
+    
+    private class Vertex implements Comparable<Vertex> {
+        public final int id;
+        public Edge[] adjacencies;
+        public double minDistance = Double.POSITIVE_INFINITY;
+        public Vertex previous;
+        
+        public Vertex(int id) {
+        	this.id = id;
+        }
+        
+        @Override
+        public String toString() {
+        	return Integer.toString(id);
+        }
+        
+        @Override
+        public int compareTo(Vertex other) {
+            return Double.compare(minDistance, other.minDistance);
+        }
+    }
+    
+    private class Edge {
+        public final Vertex target;
+        public final double weight;
+        
+        public Edge(Vertex target, double weight) {
+        	this.target = target;
+        	this.weight = weight;
+        }
+    }
     
     /*************************************************
      * COST MATRIX RANDOM GENERATER & HELPER METHODS *
