@@ -33,7 +33,7 @@ public class tcss343 {
 		}
 		System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
 		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
-		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
+		//System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
 	}
 	
 	
