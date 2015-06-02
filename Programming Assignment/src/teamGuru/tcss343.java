@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 20;
+	private static int GRAPH_SIZE = 4;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
@@ -26,8 +26,8 @@ public class tcss343 {
 		//int[][] input = z.readIn();
 		
 		//testing with sample data
-		//int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		int cost[][] = z.generateMatrix(GRAPH_SIZE);
+		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
+		//int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
