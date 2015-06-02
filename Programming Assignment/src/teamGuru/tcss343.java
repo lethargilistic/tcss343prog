@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 100;
+	private static int GRAPH_SIZE = 40;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
