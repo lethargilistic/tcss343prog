@@ -103,11 +103,7 @@ public class tcss343 {
 	public String aBruteForce(int cost[][]) {
 		int minCost = Integer.MAX_VALUE;
 		String winningSolution = "";
-		for(int i=1; i<Math.pow(2, cost.length-1); i++) {
-			//any even solutions never reach the last post
-			if(i%2==0) {
-				continue;
-			}
+		for(int i=1; i<Math.pow(2, cost.length-1); i+=2 /*Even solutions never complete*/) {
 			String bin = toBitString(i, cost.length-1);
 			int solution = 0;
 			StringBuilder solutionString = new StringBuilder("1, ");
