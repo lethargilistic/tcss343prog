@@ -83,21 +83,6 @@ public class tcss343 {
 		return inArray;
 	}
 	
-	private void printTable(int input[][]){
-		int x;
-		for(int i = 0; i < ARRAY_WIDTH; i++){
-			for(int j = 0; j < ARRAY_WIDTH; j++){
-				x = input[i][j];
-				if(x < 0)
-					System.out.print(x+" ");
-				else
-					System.out.print(" "+x+" ");
-			}
-			System.out.println();
-		}
-	}
-	
-
     /*****************************************
      * BRUTE FORCE SOLUTION & HELPER METHODS *
      *****************************************/
