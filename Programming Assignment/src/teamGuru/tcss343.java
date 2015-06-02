@@ -278,6 +278,7 @@ public class tcss343 {
 	 * @author Jeffrey LeCompte
 	 */
 	private String aDynamicProgramming(int cost[][]) {
+		// i (x) = rows j (y) = columns
 		return null;
 	}
 	
