@@ -307,63 +307,63 @@ public class tcss343 {
 			}
 		}
 	}
-	
-	/*************************************************
+
+    /*************************************************
+     *    PRIVATE CLASSES FOR DYNAMIC PROGRAMMING    *
+     *************************************************/
+    
+    private class Vertex implements Comparable<Vertex>
+    {
+        public final int id;
+        public Edge[] adjacencies;
+        public double minDistance = Double.POSITIVE_INFINITY;
+        public Vertex previous;
+        
+        public Vertex(int id) {
+        	this.id = id;
+        }
+        
+        @Override
+        public String toString() {
+        	return Integer.toString(id);
+        }
+        
+        @Override
+        public int compareTo(Vertex other) {
+            return Double.compare(minDistance, other.minDistance);
+        }
+    }
+    
+    private class Edge
+    {
+        public final Vertex target;
+        public final double weight;
+        
+        public Edge(Vertex target, double weight) {
+        	this.target = target;
+        	this.weight = weight;
+        }
+    }
+    
+    
+    /*************************************************
      * COST MATRIX RANDOM GENERATER & HELPER METHODS *
      *************************************************/
-	
-	/**
-	 * @author ian
-	 * @param n
-	 * @return
-	 */
-	private int[][] generateMatrix(int n) {
-		int [][]arr = new int[n][n];
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<n; j++) {
-				if(j>i) {
-					arr[i][j] = (int)(Math.random()*9) +1;
-				}
-			}
-		}
-		return arr;
-	}
-}
-
-
-/*************************************************
- *    PRIVATE CLASSES FOR DYNAMIC PROGRAMMING    *
- *************************************************/
-
-class Vertex implements Comparable<Vertex>
-{
-    public final int id;
-    public Edge[] adjacencies;
-    public double minDistance = Double.POSITIVE_INFINITY;
-    public Vertex previous;
     
-    public Vertex(int id) {
-    	this.id = id;
-    }
-    
-    @Override
-    public String toString() {
-    	return Integer.toString(id);
-    }
-    
-    @Override
-    public int compareTo(Vertex other) {
-        return Double.compare(minDistance, other.minDistance);
-    }
-}
-
-class Edge
-{
-    public final Vertex target;
-    public final double weight;
-    
-    public Edge(Vertex target, double weight) {
-    	this.target = target;
-    	this.weight = weight;
+    /**
+     * @author ian
+     * @param n
+     * @return
+     */
+    private int[][] generateMatrix(int n) {
+        int [][]arr = new int[n][n];
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                if(j>i) {
+                    arr[i][j] = (int)(Math.random()*9) +1;
+                }
+            }
+        }
+        return arr;
     }
 }
