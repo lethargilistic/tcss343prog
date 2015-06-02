@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
 
 public class tcss343 {
 	private static int ARRAY_WIDTH;
-	private static int GRAPH_SIZE = 20;
+	private static int GRAPH_SIZE = 30;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 //		String in = args[0];//gets the command line argument, which will be the name of the file to use
@@ -39,11 +39,22 @@ public class tcss343 {
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
-		System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
+		
+		long time = System.currentTimeMillis();
 		System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
-		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
+		System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
+        System.out.println();
+        
+        time = System.currentTimeMillis();
+        System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
+        System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
+        System.out.println();
+        
+        time = System.currentTimeMillis();
+//		System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
+	    System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
+	    System.out.println();
 	}
-	
 	
 	/****************
      * FILE READING *
@@ -172,7 +183,7 @@ public class tcss343 {
 	
 	//returns a bitString with leading 0's
 	private String toBitString(int nummy, int size) {
-		System.out.println("Comparing solution #" + nummy);
+//		System.out.println("Comparing solution #" + nummy);
 		StringBuilder str = new StringBuilder();
 		str.append(Integer.toBinaryString(nummy));
 		while(str.length()<size) {
