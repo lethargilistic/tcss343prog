@@ -26,8 +26,8 @@ public class tcss343 {
 		//int[][] input = z.readIn();
 		
 		//testing with sample data
-		int cost[][] = {{0,2,3,7},{0,0,2,4},{0,0,0,2},{0,0,0,0}};
-		//int cost[][] = z.generateMatrix(GRAPH_SIZE);
+		//int cost[][] = {{0,2,3,7,6,2},{0,0,2,4,2,2},{0,0,0,2,1,2},{0,0,0,0,4,4},{0,0,0,0,0,1},{0,0,0,0,0,0}};
+		int cost[][] = z.generateMatrix(GRAPH_SIZE);
 		for(int[]arr:cost) {
 			System.out.println(Arrays.toString(arr));
 		}
@@ -209,6 +209,29 @@ public class tcss343 {
 			minSolutions[cost.length-1].getPath().substring(0, minSolutions[cost.length-1].getPath().lastIndexOf(","));
 	}
 	
+	private class Pair {
+		String path;
+		int cost;
+		
+		public Pair(String aPath, int aCost) {
+			path = aPath;
+			cost = aCost;
+		}
+		
+		public String getPath() {
+			return path;
+		}
+		
+		public int getCost() {
+			return cost;
+		}
+		
+		@Override
+		public String toString() {
+			return path + " : " + cost;
+		}
+	}
+	
     /*************************************************
      * COST MATRIX RANDOM GENERATER & HELPER METHODS *
      *************************************************/
@@ -230,26 +253,4 @@ public class tcss343 {
         return arr;
     }
     
-    private class Pair {
-    	String path;
-    	int cost;
-
-    	public Pair(String apath, int acost) {
-    		path = apath;
-    		cost = acost;
-    	}
-
-    	public String getPath() {
-    		return path;
-    	}
-
-    	public int getCost() {
-    		return cost;
-    	}
-    	
-    	@Override
-    	public String toString() {
-    		return path + " : " + cost;
-    	}
-    }
 }
