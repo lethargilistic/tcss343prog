@@ -1,6 +1,9 @@
 package teamGuru;
 
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +17,7 @@ import java.util.Scanner;
 
 public class tcss343 {
 	// Used for random matrix generation
-	private static int GRAPH_SIZE = 20;
+	private static int GRAPH_SIZE = 60;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
@@ -22,13 +25,24 @@ public class tcss343 {
 		int[][] input = z.readIn();
 		
 		
-		/* Random matrix generator */
-//		int cost[][] = z.generateMatrix(GRAPH_SIZE);
-//		for(int[]arr:cost) {
-//			System.out.println(Arrays.toString(arr));
+		/* Random matrix generator and printing */
+//		int input[][] = z.generateMatrix(GRAPH_SIZE);
+//		PrintWriter p = null;
+//		try {
+//            p = new PrintWriter("File"+GRAPH_SIZE+".txt", "ASCII");
+//        }
+//        catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//		for(int[]arr:input) {
+//			for (int i : arr) {
+//			    p.print(i + "\t");
+//			}
+//			p.print("\r\n");
 //		}
-		
-        long time = System.currentTimeMillis();
+//		p.close();
+        
+		long time = System.currentTimeMillis();
         System.out.println("Dynamic Programming~ \t"+ z.dynamicProgramming(input));
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
 	    System.out.println();
@@ -42,7 +56,6 @@ public class tcss343 {
         System.out.println("Brute Force~ \t\t"+ z.aBruteForce(input));
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
         System.out.println();
-
 	}
 	
 	/****************
