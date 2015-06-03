@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class tcss343 {
 	private static int ARRAY_WIDTH;
 
-	private static int GRAPH_SIZE = 4;
+	private static int GRAPH_SIZE = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
@@ -166,13 +166,13 @@ public class tcss343 {
 	 */
 	private Pair aDivideandConquer(int cost[][], int x, int y) {
 		if (x == 0) {
-			return new Pair("1, " + (y+1) + ", ", cost[0][y]);
+			return new Pair(new StringBuilder("1, ").append(y+1).append(", "), cost[0][y]);
 		} else if (x < y) {
 			Pair solution = aDivideandConquer(cost, x, x);
-			return new Pair(solution.getPath() + (y+1) + ", ",
-					solution.getCost() + cost[x][y]);
+			return new Pair(solution.getPath().append(y+1).append(", "),
+			                solution.getCost() + cost[x][y]);
 		} else {
-			Pair winningSolution = new Pair("", Integer.MAX_VALUE);
+			Pair winningSolution = new Pair(new StringBuilder(), Integer.MAX_VALUE);
 			for (int i = 0; i < y; i++) {
 				//retrieve minimum cost from solution
 				Pair solution = aDivideandConquer(cost, i, y);
@@ -190,17 +190,17 @@ public class tcss343 {
 	
 	public String dynamicProgramming(int cost[][]) {
 		Pair []minSolutions = new Pair[cost.length];
-		minSolutions[0] = new Pair("1, ", 0);
-		minSolutions[1] = new Pair("1, 2, ", cost[0][1]);
+		minSolutions[0] = new Pair(new StringBuilder("1, "), 0);
+		minSolutions[1] = new Pair(new StringBuilder("1, 2, "), cost[0][1]);
 
 		for(int i=2; i<cost.length; i++) {
 			int minnie = cost[0][i];
-			String pathos = "1, " + (i+1) + ", ";
+			StringBuilder pathos = new StringBuilder("1, ").append(i+1).append(", ");
 			for(int j=1; j<i; j++) {
 				int currCost = minSolutions[j].getCost() + cost[j][i];
 				if(currCost < minnie) {
 					minnie = currCost;
-					pathos = minSolutions[j].getPath() + (i+1) + ", ";
+					minSolutions[j].getPath().append(i+1).append(", ");
 				}
 			}
 			minSolutions[i] = new Pair(pathos, minnie);
@@ -211,15 +211,15 @@ public class tcss343 {
 	}
 	
 	private class Pair {
-		String path;
+		StringBuilder path;
 		int cost;
 		
-		public Pair(String aPath, int aCost) {
+		public Pair(StringBuilder aPath, int aCost) {
 			path = aPath;
 			cost = aCost;
 		}
 		
-		public String getPath() {
+		public StringBuilder getPath() {
 			return path;
 		}
 		
@@ -229,7 +229,7 @@ public class tcss343 {
 		
 		@Override
 		public String toString() {
-			return path + " : " + cost;
+			return path.toString() + " : " + cost;
 		}
 	}
 	
