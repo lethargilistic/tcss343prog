@@ -1,12 +1,9 @@
 package teamGuru;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Scanner;
 
 /*
@@ -17,35 +14,33 @@ import java.util.Scanner;
  */
 
 public class tcss343 {
-	private static int ARRAY_WIDTH;
-
+	//Used for random matrix generation
 	private static int GRAPH_SIZE = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		tcss343 z = new tcss343();
 
-		//int[][] input = z.readIn();
+		int[][] input = z.readIn();
 		
-		//testing with sample data
-		//int cost[][] = {{0,2,3,7,6,2},{0,0,2,4,2,2},{0,0,0,2,1,2},{0,0,0,0,4,4},{0,0,0,0,0,1},{0,0,0,0,0,0}};
-		int cost[][] = z.generateMatrix(GRAPH_SIZE);
-		for(int[]arr:cost) {
-			System.out.println(Arrays.toString(arr));
-		}
+		
+		/* Random matrix generator */
+//		int cost[][] = z.generateMatrix(GRAPH_SIZE);
+//		for(int[]arr:cost) {
+//			System.out.println(Arrays.toString(arr));
+//		}
 		
         long time = System.currentTimeMillis();
-		//System.out.println("Dynamic Programming~ \t"+ z.aDynamicProgramming(cost));
-        System.out.println("Dynamic Programming~ \t"+ z.dynamicProgramming(cost));
+        System.out.println("Dynamic Programming~ \t"+ z.dynamicProgramming(input));
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
 	    System.out.println();
 	    
         time = System.currentTimeMillis();
-        System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(cost));
+        System.out.println("Divide & Conquer~ \t"+ z.aDivideandConquer(input));
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
         System.out.println();
         
         time = System.currentTimeMillis();
-        System.out.println("Brute Force~ \t\t"+ z.aBruteForce(cost));
+        System.out.println("Brute Force~ \t\t"+ z.aBruteForce(input));
         System.out.println("Time elapsed: " + (System.currentTimeMillis() - time) + " ms");
         System.out.println();
 
@@ -58,7 +53,7 @@ public class tcss343 {
 	/** 
 	 * @author Robbie 
 	 * 
-	 * This method reads a tab delineated sample file -- NOT A .CSV
+	 * This method reads a tab delimited sample file.
 	 */
 	private int[][] readIn(){
 		Scanner in = new Scanner(System.in);
@@ -70,7 +65,6 @@ public class tcss343 {
 			x++;
 		}
 		inArray = new int[x][x];
-		ARRAY_WIDTH = x;
 		Scanner strScan;
 		for(int i = 0; i < x; i++){
 			int j = 0;
