@@ -60,9 +60,7 @@ public class tcss343 {
 	 * 
 	 * This method reads a tab delineated sample file -- NOT A .CSV
 	 */
-//	private int[][] readIn(String fileName) throws FileNotFoundException{
 	private int[][] readIn(){
-//		Scanner in = new Scanner(new FileReader(fileName));
 		Scanner in = new Scanner(System.in);
 		
 		int inArray[][], x = 0;
@@ -142,13 +140,6 @@ public class tcss343 {
     /************************************************
      * DIVIDE AND CONQUER SOLUTION & HELPER METHODS *
      ************************************************/
-	
-	//Not sure if this is considered a 'divide' and conquer or
-	// 'decrease' and conquer but its a good starting point.
-	//will do a full write-up of how it works for presentations
-	//but it's pretty close to the self-reduction mentioned in the
-	//DivideConquer.txt. file.
-	// Looks pretty good :) - Jef
 	private String aDivideandConquer(int cost[][]) {
 		//retrieve data from String
 		Pair solution = aDivideandConquer(cost, cost.length-1, cost.length-1);
