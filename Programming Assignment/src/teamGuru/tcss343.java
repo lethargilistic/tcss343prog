@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 
 public class tcss343 {
-	//Used for random matrix generation
+	// Used for random matrix generation
 	private static int GRAPH_SIZE = 20;
 	
 	public static void main(String[] args) throws FileNotFoundException{
@@ -51,7 +51,7 @@ public class tcss343 {
      ****************/
 	
 	/** 
-	 * @author Robbie 
+	 * @author Robbie Nichols
 	 * 
 	 * This method reads a tab delimited sample file.
 	 */
@@ -73,10 +73,10 @@ public class tcss343 {
 				String str = strScan.next();
 				for (String s : str.split(","))
 				{
-    				if(s.equals("NA"))//if the String is NA then set to sentinel -1
+    				if(s.equals("NA")) // if the String is NA then set to sentinel -1
     					inArray[i][j++] = -1;
     				else
-    					inArray[i][j++] = Integer.parseInt(s); //otherwise parse int and store.
+    					inArray[i][j++] = Integer.parseInt(s); // otherwise parse int and store
 				}
 			}
  			strScan.close();
@@ -89,14 +89,16 @@ public class tcss343 {
      * BRUTE FORCE SOLUTION & HELPER METHODS *
      *****************************************/
 	
-	/** @author ian
+	/** @author Ian McPeek
 	 *  Computes all possible solutions by using bitstrings.
 	 *  @return a String containing the minimum cost and path.
 	 */
 	public String aBruteForce(int cost[][]) {
 		int minCost = Integer.MAX_VALUE;
 		String winningSolution = "";
-		for(int i=1; i<Math.pow(2, cost.length-1); i+=2 /*Even solutions never complete*/) {
+		
+		 /*Even solutions never complete*/
+		for(int i = 1; i < Math.pow(2, cost.length - 1); i += 2) {
 			String bin = toBitString(i, cost.length-1);
 			int solution = 0;
 			StringBuilder solutionString = new StringBuilder("1, ");
@@ -178,10 +180,10 @@ public class tcss343 {
 		minSolutions[0] = new Pair(new StringBuilder("1, "), 0);
 		minSolutions[1] = new Pair(new StringBuilder("1, 2, "), cost[0][1]);
 
-		for(int i=2; i<cost.length; i++) {
+		for(int i = 2; i < cost.length; i++) {
 			int minnie = cost[0][i];
 			StringBuilder pathos = new StringBuilder("1, ").append(i+1).append(", ");
-			for(int j=1; j<i; j++) {
+			for(int j = 1; j < i; j++) {
 				int currCost = minSolutions[j].getCost() + cost[j][i];
 				if(currCost < minnie) {
 					minnie = currCost;
@@ -191,8 +193,9 @@ public class tcss343 {
 			minSolutions[i] = new Pair(pathos, minnie);
 		}
 
-		return "Minimum Cost: " + minSolutions[cost.length-1].getCost() + " Path: " + 
-			minSolutions[cost.length-1].getPath().substring(0, minSolutions[cost.length-1].getPath().lastIndexOf(","));
+		return "Minimum Cost: " + minSolutions[cost.length - 1].getCost() + " Path: " + 
+			minSolutions[cost.length - 1].getPath().substring(0,
+					minSolutions[cost.length - 1].getPath().lastIndexOf(","));
 	}
 	
 	private class Pair {
@@ -223,16 +226,16 @@ public class tcss343 {
      *************************************************/
     
     /**
-     * @author ian
+     * @author Ian McPeek
      * @param n
      * @return
      */
     private int[][] generateMatrix(int n) {
         int [][]arr = new int[n][n];
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                if(j>i) {
-                    arr[i][j] = (int)(Math.random()*9) +1;
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                if(j > i) {
+                    arr[i][j] = (int)(Math.random() * 9) + 1;
                 }
             }
         }
