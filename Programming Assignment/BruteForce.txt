@@ -1,0 +1,30 @@
+Herein we will do work thinking about the general algorithm for the Brute Force solution.
+
+
+Okay, so brute force would be to check each and every possible combination. In the example, there are four combinations
+
+1-2-3-4 = 2 + 2 + 2 = 6
+1-2-4= 2 + 4 = 6
+1-3-4 = 2 + 3 = 5
+1-4 = 7
+
+5 is the least, so that means it's the answer.
+
+Each of those weights come from an array. 
+Obviously, internally, we would need to have it be 0-indexed. Just subtract 1 from the post number when indexing.
+
+   1 2 3 4
+   _______
+1 |0 2 3 7
+2 |  0 2 4
+3 |    0 2
+4 |      0
+
+Let A be the array. Each of those calculations from before would be as follows:
+
+A[1][2] + A[2][3] + A[3][4] = 6
+A[1][2] + A[2][4] = 6
+A[1][3] + A[3][4] = 5
+A[1][4] = 7
+
+Always start at 1, always end at 4
